@@ -1,30 +1,24 @@
-// //************* syncrinous code */
-// const a = 10;
-// let b = 0;
-// console.log('program start')
+const  express = require('express');
+const middleware = require('./middlewares/filter')
+const app = express();
+const route = express.Router()
+// app lavel global middleware
+app.use(middleware.consoleLogMiddleware)
 
-// setTimeout(() => {
-//     console.log('logic execute');
-//     b = 20;
-// }, 2000)
+// route lavel group middleware must write app.use('/',route)  in end of file
+route.use(middleware.ageCheck)
 
-// console.log(a+b) //give wrong answer
-// console.log('program complete')
-
-
-
-//************* syncrinous to asyncronous */
-const a = 10;
-let b = 0;
-console.log('program start')
-
-
-const waitedData = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve(20)
-        console.log('logic execute')
-    }, 2000)
-}).then((data)=>{
-    console.log(a+data)
-    console.log('program complete')
+//route lavel middleware
+app.get('',middleware.homeMiddleware,(req,res)=>{
+    res.send('Hello from Home')
 })
+// group middleware start through route ,start
+route.get('/contact',(req,res)=>{
+    res.send('Hello from Contact')
+})
+route.get('/help',(req,res)=>{
+    res.send('Hello from help')
+})
+// group middleware start through route ,end
+app.use('/',route)
+app.listen(3000)
