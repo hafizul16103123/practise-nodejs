@@ -1,24 +1,21 @@
 const  express = require('express');
-const middleware = require('./middlewares/filter')
+const  multer = require('multer');
 const app = express();
-const route = express.Router()
-// app lavel global middleware
-app.use(middleware.consoleLogMiddleware)
+// SET STORAGE
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now()+".png")
+    }
+  })
+   
+  var upload = multer({ storage: storage })
+app.post('/file', upload.single('avatar'), function (req, res, next) {
+    // req.file is the `avatar` file
+    // req.body will hold the text fields, if there were any
+    res.send('file uploaded')
+  })
 
-// route lavel group middleware must write app.use('/',route)  in end of file
-route.use(middleware.ageCheck)
-
-//route lavel middleware
-app.get('',middleware.homeMiddleware,(req,res)=>{
-    res.send('Hello from Home')
-})
-// group middleware start through route ,start
-route.get('/contact',(req,res)=>{
-    res.send('Hello from Contact')
-})
-route.get('/help',(req,res)=>{
-    res.send('Hello from help')
-})
-// group middleware start through route ,end
-app.use('/',route)
 app.listen(3000)
