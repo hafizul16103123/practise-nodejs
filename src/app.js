@@ -1,21 +1,14 @@
 const  express = require('express');
-const  multer = require('multer');
 const app = express();
-// SET STORAGE
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'uploads')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now()+".png")
-    }
-  })
-   
-  var upload = multer({ storage: storage })
-app.post('/file', upload.single('avatar'), function (req, res, next) {
-    // req.file is the `avatar` file
-    // req.body will hold the text fields, if there were any
-    res.send('file uploaded')
-  })
+
+const {persion} = require('./utils/module.exports')
+const {persion1} = require('./utils/exports')
+console.log(persion);
+// console.log(users.patient);
+// console.log(users.getPersion());
+
+console.log(persion1);
+// console.log(users2.patient1);
+// console.log(users2.getPersion());
 
 app.listen(3000)
