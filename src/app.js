@@ -1,37 +1,56 @@
 const express = require('express');
-const fs = require('fs')
-const path = require('path')
+const os = require('os')
 const app = express();
-try {
-    const file = './data/data.txt';
-    console.log(path.dirname(file))
-    console.log(path.basename(file))
-    console.log(path.extname(file))
 
-} catch (error) {
-    console.log(error)
-}
+const eol = os.EOL;
+console.log({eol})
 
-// join path
-const name = 'joe'
-const filePath = path.join('/', 'users', name, 'notes.txt')
-console.log(filePath)
+const constantsSignals = os.constants.signals;
+console.log({constantsSignals})
 
-//You can get the absolute path calculation of a relative path using path.resolve():
-const relativeToAbsolutePath = path.resolve('data/data.txt')
-console.log({relativeToAbsolutePath})
-const normalizePath = path.normalize('/users/joe/..//test.txt')
-console.log({normalizePath})
+const arch = os.arch();
+console.log({arch})
 
-// POSIX
-path.format({ dir: '/Users/joe', base: 'test.txt' }) //  '/Users/joe/test.txt'
+const cpus = os.cpus();
+console.log({cpus})
 
-path.format({ root: '/Users/joe', name: 'test', ext: '.txt' }) //  '/Users/joe/test.txt'
+const endianness = os.endianness();
+console.log({endianness})
 
-// WINDOWS
-path.format({ dir: 'C:\\Users\\joe', base: 'test.txt' }) //  'C:\\Users\\joe\\test.txt'
-const parsePath = path.parse('./data/d/data.txt')
-console.log({parsePath})
+const homedir = os.homedir();
+console.log({homedir})
+
+const hostname = os.hostname();
+console.log({hostname})
+
+const networkInterfaces = os.networkInterfaces();
+console.log({networkInterfaces})
+ 
+const totalmem = os.totalmem();
+console.log({totalmem:totalmem})
+console.log({totalmem:totalmem/(1024*1024*1024)})
+
+const freemem = os.freemem();
+console.log({freemem:freemem})
+console.log({freemem:freemem/(1024*1024*1024)})
+
+const platform = os.platform();
+console.log({platform})
+
+const release = os.release();
+console.log({release})
+
+const tmpdir = os.tmpdir();
+console.log({tmpdir})
+
+const type = os.type();
+console.log({type})
+
+const uptime = os.uptime();
+console.log({uptime})
+
+const userInfo = os.userInfo();
+console.log({userInfo})
 
  
 app.listen(3000)
