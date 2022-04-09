@@ -10,6 +10,7 @@ try {
     console.log(file.isDirectory())
     console.log(file.isSymbolicLink())
     console.log(file.size)
+    
 } catch (error) {
     console.log(error)
 }
