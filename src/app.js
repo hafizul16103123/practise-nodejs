@@ -28,3 +28,31 @@ const waitedData = new Promise((resolve, reject) => {
     console.log(a+data)
     console.log('program complete')
 })
+
+// // Promise
+// const done = false;
+// //create promise
+// const isWorkDone = () => {
+//     return new Promise((resolve, reject) => {
+//         if (done) {
+//             const data = 'Work is done';
+//             resolve(data)
+//         }
+//         const data = 'Not done yet'
+//         reject(data)
+//     })
+// }
+
+// // calling promise
+// const checkIsWorkDone = () => {
+//     isWorkDone()
+//         .then(ok => { console.log(ok) })
+//         .catch(err => { console.log(err) })
+// }
+// checkIsWorkDone()
+
+// // async/await
+const printName = async()=>{
+    return 'pk'
+}
+printName().then((data)=>{console.log(data)})
