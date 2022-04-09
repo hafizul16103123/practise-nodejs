@@ -1,18 +1,19 @@
 const express = require('express');
-const EventEmitter = require('events')
+const fs = require('fs')
+const path = require('path')
 const app = express();
-// EventEmitter
-const eventEmitter = new EventEmitter()
-
-eventEmitter.on('start',()=>{
-    console.log('events call')
-})
-
-function e (){
-    eventEmitter.emit('start')
+try {
+    // console.log(path.dirname('./data/data.txt'))
+    // console.log(path.basename('./data/data.txt'))
+    const file = fs.statSync('data.txt','r')
+    console.log(file.isFile())
+    console.log(file.isDirectory())
+    console.log(file.isSymbolicLink())
+    console.log(file.size)
+} catch (error) {
+    console.log(error)
 }
-e()
 
 
-
+ 
 app.listen(3000)
